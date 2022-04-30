@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundLogin"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_fechar"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:background="@drawable/circulo_vermelho"
+        android:text="@string/btn_fechar"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+
+    <ImageView
+        android:id="@+id/imglogin"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/login" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:gravity="center|top"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/rgm_entrada"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints="true"
+            android:background="@color/branco"
+            android:ems="10"
+            android:hint="@string/txtrgm_tip"
+            android:inputType="number"
+            android:text="@string/rgm"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/senha_entrada"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints="true"
+            android:background="@color/branco"
+            android:ems="10"
+            android:hint="@string/txtsenha_tip"
+            android:inputType="textPassword"
+            android:text="@string/senha"
+            android:textAlignment="center" />
+
+
+        <Button
+            android:id="@+id/btn_entrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/transparenciatxt"
+            android:text="@string/btn_entrar"
+            android:textAlignment="center"
+            android:textColor="@color/branco" />
+
+    </LinearLayout>
+</LinearLayout>
