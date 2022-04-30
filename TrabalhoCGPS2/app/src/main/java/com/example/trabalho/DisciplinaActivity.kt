@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.icu.util.Calendar
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -21,7 +22,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import org.w3c.dom.Text
 
 
 class ObtainGPS(context: Context) : Service(), LocationListener {
@@ -210,7 +210,15 @@ class DisciplinaActivity : AppCompatActivity() {
         val extras = intent.extras
 
         if (extras != null) {
+            val Diadadisc = extras.getString("dia_semana_disc")
+            val Disc_do_dia = extras.getString("disciplina_do_dia")
             val DiscliplinAlvo = extras.getString("disciplinaalvo")
+            val mpresenca : Button = findViewById(R.id.mpresenca)
+
+            if (Disc_do_dia != DiscliplinAlvo) {
+                mpresenca.isEnabled = false;
+            }
+
             Disciplina.text = DiscliplinAlvo
         }
 

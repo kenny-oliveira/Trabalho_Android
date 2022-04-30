@@ -180,7 +180,7 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtdisciplina_dia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shapes"
@@ -190,7 +190,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/disciplina_dia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shapes"

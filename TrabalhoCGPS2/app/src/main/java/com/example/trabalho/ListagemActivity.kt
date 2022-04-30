@@ -2,12 +2,16 @@ package com.example.trabalho
 
 import android.content.Intent
 import android.graphics.PorterDuff
-import androidx.appcompat.app.AppCompatActivity
+import android.icu.text.SimpleDateFormat
+import android.icu.util.GregorianCalendar
+import android.net.ParseException
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import java.util.*
 
 class ListagemActivity : AppCompatActivity() {
 
@@ -27,10 +31,12 @@ class ListagemActivity : AppCompatActivity() {
     private fun CriarEvento(Id: Int,Id2: Int){
         val elemento: TextView = findViewById<View>(Id) as TextView
         val elemento2: TextView = findViewById<View>(Id2) as TextView
+        val DisciplinaDia : TextView = findViewById(R.id.disciplina_dia)
         elemento.setOnClickListener {
             val intent = Intent(this, DisciplinaActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.putExtra("disciplinaalvo", elemento2.text);
+            intent.putExtra("disciplina_do_dia",DisciplinaDia.text)
             startActivity(intent)
         }
     }
