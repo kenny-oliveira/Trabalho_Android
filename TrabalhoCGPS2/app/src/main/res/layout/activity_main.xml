@@ -41,6 +41,7 @@
             android:ems="10"
             android:hint="@string/txtrgm_tip"
             android:inputType="number"
+            android:maxLength="8"
             android:text="@string/rgm"
             android:textAlignment="center" />
 
@@ -54,6 +55,7 @@
             android:ems="10"
             android:hint="@string/txtsenha_tip"
             android:inputType="textPassword"
+            android:maxLength="14"
             android:text="@string/senha"
             android:textAlignment="center" />
 
