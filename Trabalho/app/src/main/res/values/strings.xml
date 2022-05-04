@@ -4,8 +4,8 @@
     <string name="btn_fechar">X</string>
     <string name="txtrgm_tip">RGM</string>
     <string name="txtsenha_tip">Senha</string>
-    <string name="senha"></string>
-    <string name="rgm"></string>
+    <string name="senha" />
+    <string name="rgm" />
     <string name="Logout">Logout</string>
     <string name="seg">Segunda-Feira</string>
     <string name="ter">Terça-Feira</string>

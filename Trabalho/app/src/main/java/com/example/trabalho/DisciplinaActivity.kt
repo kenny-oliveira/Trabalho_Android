@@ -37,6 +37,9 @@ class DisciplinaActivity : AppCompatActivity() {
             /**voltar para os dias da semana**/
             val intent = Intent(this, ListagemActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.putExtra("idcursoaluno", extras!!.getString("idcursoaluno"));
+            intent.putExtra("rgm", extras!!.getString("rgm"));
+            intent.putExtra("idaluno", extras.getString("idaluno"));
             startActivity(intent)
         }
     }
