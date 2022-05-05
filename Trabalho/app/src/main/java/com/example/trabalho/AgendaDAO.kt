@@ -60,11 +60,12 @@ class AgendaDAO(ctx: Context?) {
         return gw!!.database.insert(TABLE_Curso, null, cv) > 0
     }
 
-    fun salvarPresenca(idmateria: Int, idaluno: Int, data: String?): Boolean {
+    fun salvarPresenca(idmateria: Int, idaluno: Int, data: String?,horario : String?): Boolean {
         val cv = ContentValues()
-        cv.put("id_materia ", idmateria)
+        cv.put("id_materia", idmateria)
         cv.put("id_aluno", idaluno)
         cv.put("data", data)
+        cv.put("horario",horario)
         return gw!!.database.insert(TABLE_Presenca, null, cv) > 0
     }
 
@@ -87,10 +88,11 @@ class AgendaDAO(ctx: Context?) {
             salvarAluno(20558619, "Everton Tunis Monteiro", "12344321", 1)
             salvarAluno(21571112, "Nicolas Matheus Rodrigues Viana", "343434", 1)
             salvarAluno(123, "Naruto", "123", 1)
-            salvarMateria("TRABALHO DE GRADUAÇÃO INTERDISCIPLINAR I","Segunda-Feira","19:10","20:25",1)
-            salvarMateria("PROGRAMAÇÃO PARA DISPOSITIVOS MÓVEIS","Quarta-Feira","19:10","21:50",1)
-            salvarMateria("FUNDAMENTOS DE INTELIGÊNCIA ARTIFICIAL","Quinta-Feira","19:10","21:50",1)
-            salvarMateria("LINGUAGENS FORMAIS E AUTÔMATOS","Sexta-Feira","19:10","21:50",1)
+            salvarAluno(1, "Sasuke", "1", 1)
+            salvarMateria("TRABALHO DE GRADUAÇÃO INTERDISCIPLINAR I","Segunda-Feira","19.10","20.25",1)
+            salvarMateria("PROGRAMAÇÃO PARA DISPOSITIVOS MÓVEIS","Quarta-Feira","19.10","21.50",1)
+            salvarMateria("FUNDAMENTOS DE INTELIGÊNCIA ARTIFICIAL","Quinta-Feira","19.10","21.50",1)
+            salvarMateria("LINGUAGENS FORMAIS E AUTÔMATOS","Sexta-Feira","19.10","21.50",1)
             Log.i("UPD-Qtd: ", cursor.count.toString() + " Cursos")
             Log.i("UPD-Qtd: ", cursor2.count.toString() + " Alunos")
         }
@@ -148,7 +150,8 @@ class AgendaDAO(ctx: Context?) {
                 val idmateria: Int = cursor.getInt(cursor.getColumnIndexOrThrow("id_materia"))
                 val idaluno: Int = cursor.getInt(cursor.getColumnIndexOrThrow("id_aluno"))
                 val data: String = cursor.getString(cursor.getColumnIndexOrThrow("data"))
-                presenca.add(Presenca(id, idmateria, idaluno, data))
+                val horario: String = cursor.getString(cursor.getColumnIndexOrThrow("horario"))
+                presenca.add(Presenca(id, idmateria, idaluno, data,horario))
         }
         cursor.close()
         return presenca

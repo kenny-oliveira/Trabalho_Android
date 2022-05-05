@@ -8,198 +8,213 @@
     android:orientation="vertical"
     tools:context=".ListagemActivity">
 
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Logout"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/Segunda_Feira"
-            android:layout_width="match_parent"
-            android:layout_height="94sp"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/mountain"
-            android:backgroundTintMode="screen"
-            android:clickable="true"
-            android:text="@string/seg"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/dias"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/disc_seg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/Segunda_Feira"
-            android:background="@drawable/shapes"
-            android:backgroundTint="@color/transparenciatxt"
-            android:elevation="1dp"
-            android:text="@string/dseg"
-            android:textAlignment="textEnd"
-            android:textAllCaps="false"
-            android:textColor="@color/disciplinas"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
-
-    <RelativeLayout android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-
-        <TextView
-            android:id="@+id/Terça_Feira"
-            android:layout_width="match_parent"
-            android:layout_height="94sp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/parquenacional"
-            android:clickable="true"
-            android:text="@string/ter"
-            android:textAlignment="textStart"
-            android:textColor="@color/dias"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:ignore="TextContrastCheck" />
-
-        <TextView
-            android:id="@+id/disc_ter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/Terça_Feira"
-            android:background="@drawable/shapes"
-            android:backgroundTint="@color/transparenciatxt"
-            android:text="@string/dter"
-            android:textAlignment="textEnd"
-            android:textColor="@color/disciplinas"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
-    <RelativeLayout android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-
-        <TextView
-            android:id="@+id/Quarta_Feira"
-            android:layout_width="match_parent"
-            android:layout_height="94sp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/lago"
-            android:clickable="true"
-            android:text="@string/qua"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/dias"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/disc_qua"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/Quarta_Feira"
-            android:background="@drawable/shapes"
-            android:backgroundTint="@color/transparenciatxt"
-            android:text="@string/dqua"
-            android:textAlignment="textEnd"
-            android:textColor="@color/disciplinas"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
-    <RelativeLayout android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-
-        <TextView
-            android:id="@+id/Quinta_Feira"
-            android:layout_width="match_parent"
-            android:layout_height="94sp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/cachoeira"
-            android:clickable="true"
-            android:text="@string/qui"
-            android:textAlignment="textStart"
-            android:textColor="@color/dias"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/disc_qui"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/Quinta_Feira"
-            android:background="@drawable/shapes"
-            android:backgroundTint="@color/transparenciatxt"
-            android:text="@string/dqui"
-            android:textAlignment="textEnd"
-            android:textColor="@color/disciplinas"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
-    <RelativeLayout android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/Sexta_Feira"
-            android:layout_width="match_parent"
-            android:layout_height="94sp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/sakura"
-            android:clickable="true"
-            android:text="@string/sex"
-            android:textAlignment="textStart"
-            android:textColor="@color/dias"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/disc_sex"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/Sexta_Feira"
-            android:background="@drawable/shapes"
-            android:backgroundTint="@color/transparenciatxt"
-            android:text="@string/dsex"
-            android:textColor="@color/disciplinas"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textAlignment="textEnd" />
-    </RelativeLayout>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="bottom">
+        android:layout_height="wrap_content">
 
-
-        <TextView
-            android:id="@+id/txtdisciplina_dia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shapes"
-            android:backgroundTint="@color/transparenciatxt"
-            android:text="@string/txtdia"
-            android:textColor="@color/branco"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/disciplina_dia"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shapes"
-            android:backgroundTint="@color/transparenciatxt"
-            android:text="@string/disc_dia"
-            android:textAlignment="center"
-            android:textColor="@color/branco"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Logout"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="bottom">
+
+
+                <TextView
+                    android:id="@+id/txtdisciplina_dia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shapes"
+                    android:backgroundTint="@color/transparenciatxt"
+                    android:text="@string/txtdia"
+                    android:textColor="@color/branco"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/disciplina_dia"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shapes"
+                    android:backgroundTint="@color/transparenciatxt"
+                    android:text="@string/disc_dia"
+                    android:textAlignment="center"
+                    android:textColor="#A4FFF2"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Segunda_Feira"
+                    android:layout_width="match_parent"
+                    android:layout_height="94sp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/mountain"
+                    android:backgroundTintMode="screen"
+                    android:clickable="true"
+                    android:text="@string/seg"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dias"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/disc_seg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/Segunda_Feira"
+                    android:background="@drawable/shapes"
+                    android:backgroundTint="@color/transparenciatxt"
+                    android:elevation="1dp"
+                    android:text="@string/dseg"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/disciplinas"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Terça_Feira"
+                    android:layout_width="match_parent"
+                    android:layout_height="94sp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/parquenacional"
+                    android:clickable="true"
+                    android:text="@string/ter"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/dias"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/disc_ter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/Terça_Feira"
+                    android:background="@drawable/shapes"
+                    android:backgroundTint="@color/transparenciatxt"
+                    android:text="@string/dter"
+                    android:textAlignment="center"
+                    android:textColor="@color/disciplinas"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Quarta_Feira"
+                    android:layout_width="match_parent"
+                    android:layout_height="94sp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/lago"
+                    android:clickable="true"
+                    android:text="@string/qua"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dias"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/disc_qua"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/Quarta_Feira"
+                    android:background="@drawable/shapes"
+                    android:backgroundTint="@color/transparenciatxt"
+                    android:text="@string/dqua"
+                    android:textAlignment="center"
+                    android:textColor="@color/disciplinas"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Quinta_Feira"
+                    android:layout_width="match_parent"
+                    android:layout_height="94sp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/cachoeira"
+                    android:clickable="true"
+                    android:text="@string/qui"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/dias"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/disc_qui"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/Quinta_Feira"
+                    android:background="@drawable/shapes"
+                    android:backgroundTint="@color/transparenciatxt"
+                    android:text="@string/dqui"
+                    android:textAlignment="center"
+                    android:textColor="@color/disciplinas"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Sexta_Feira"
+                    android:layout_width="match_parent"
+                    android:layout_height="94sp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/sakura"
+                    android:clickable="true"
+                    android:text="@string/sex"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/dias"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/disc_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/Sexta_Feira"
+                    android:background="@drawable/shapes"
+                    android:backgroundTint="@color/transparenciatxt"
+                    android:text="@string/dsex"
+                    android:textAlignment="center"
+                    android:textColor="@color/disciplinas"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

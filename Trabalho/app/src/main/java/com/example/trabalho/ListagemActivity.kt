@@ -1,5 +1,6 @@
 package com.example.trabalho
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -13,9 +14,9 @@ import org.w3c.dom.Text
 import java.util.*
 
 class ListagemActivity : AppCompatActivity() {
-
     private fun AlterarAlpha(elemento: TextView, valor: Float){
         if (valor != 1F) {
+            elemento.text = "Nenhuma Disciplina"
             elemento.alpha = valor
             elemento.backgroundTintMode = PorterDuff.Mode.SCREEN
             elemento.background.setTint(ContextCompat.getColor(this, R.color.disc_transp))
@@ -80,14 +81,17 @@ class ListagemActivity : AppCompatActivity() {
     private fun CriarEvento(elemento: TextView,elemento2: TextView){
         val DisciplinaDia : TextView = findViewById(R.id.disciplina_dia)
         val extras = intent.extras
+        if (DisciplinaDia.text == "Nenhuma Disciplina"){
+            DisciplinaDia.isEnabled = false
+        }
         elemento.setOnClickListener {
             val intent = Intent(this, DisciplinaActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.putExtra("disciplinaalvo", elemento2.text);
             intent.putExtra("disciplina_do_dia",DisciplinaDia.text)
-            intent.putExtra("idcursoaluno", extras!!.getString("idcursoaluno"));
-            intent.putExtra("rgm", extras!!.getString("rgm"));
-            intent.putExtra("idaluno", extras.getString("idaluno"));
+            intent.putExtra("idcursoaluno", extras!!.getInt("idcursoaluno"));
+            intent.putExtra("rgm", extras!!.getInt("rgm"));
+            intent.putExtra("idaluno", extras.getInt("idaluno"));
             startActivity(intent)
         }
     }
@@ -120,20 +124,21 @@ class ListagemActivity : AppCompatActivity() {
         DiaNList.add("Sexta-Feira")
 
         if (extras != null) {
-            val idcursoaluno = extras.getString("idcursoaluno")
-            val idaluno = extras.getString("idaluno")
-            val rgmaluno = extras.getString("rgm")
+            val idcursoaluno = extras.getInt("idcursoaluno")
+            val idaluno = extras.getInt("idaluno")
+            val rgmaluno = extras.getInt("rgm")
 
             for (curso in CursoLista!!) {
-                if (curso!!.id.toString() == idcursoaluno) {
-                    Log.i("Curso: ",curso!!.nome)
-                    Log.i("Dia Atual: ",(RetornarDia(dia)))
-                    for (mater in MateriaLista!!){
-                        if (mater!!.idcurso == curso!!.id){
+                if (curso!!.id.toString() == idcursoaluno.toString()) {
+                    Log.i("Curso: ", curso!!.nome)
+                    Log.i("Dia Atual: ", (RetornarDia(dia)))
+                    for (mater in MateriaLista!!) {
+                        if (mater!!.idcurso == curso!!.id) {
                             DiaSList.add(mater!!.dia)
-                            val Elemento = RetornarDiaElemento(RetornarDia(RetornarDiaNumero(mater!!.dia)))
+                            val Elemento =
+                                RetornarDiaElemento(RetornarDia(RetornarDiaNumero(mater!!.dia)))
                             Elemento.text = mater!!.nome
-                            if (mater!!.dia == RetornarDia(dia)){
+                            if (mater!!.dia == RetornarDia(dia)) {
                                 DisciplinaDia.text = mater!!.nome
                             }
                         }
@@ -153,6 +158,7 @@ class ListagemActivity : AppCompatActivity() {
                 CriarEvento(elemento,elemento2)
             }
 
+            CriarEvento(findViewById(R.id.disciplina_dia),findViewById(R.id.disciplina_dia))
         }
 
 

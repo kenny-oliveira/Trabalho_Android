@@ -2,6 +2,7 @@ package com.example.trabalho
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -37,20 +38,22 @@ class MainActivity : AppCompatActivity() {
         var sucesso = 0
         btnentrar.setOnClickListener {
             for (estealuno in AlunosLista!!) {
+                Log.i("Aluno: ",estealuno!!.nome)
               if (rgm_entrada.text.toString() == estealuno.rgm.toString()){
                   if (senha_entrada.text.toString() == estealuno.senha){
                       sucesso = 1
                       val intent = Intent(this, ListagemActivity::class.java)
                       intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                      intent.putExtra("idcursoaluno", estealuno.idcurso.toString());
-                      intent.putExtra("rgm", estealuno.rgm.toString());
-                      intent.putExtra("idaluno", estealuno.id.toString());
+                      intent.putExtra("idcursoaluno", estealuno.idcurso);
+                      intent.putExtra("rgm", estealuno.rgm);
+                      intent.putExtra("idaluno", estealuno.id);
                       startActivity(intent)
                   }
               }
             }
             if (sucesso == 0){
                 Toast.makeText(this, "Usuario ou senha incorreto", Toast.LENGTH_SHORT).show()
+
             }
         }
     }

@@ -29,8 +29,10 @@ class AgendaDBHelper(context: Context?) :
 
     private val SQLCREATEPRESENCA = "CREATE TABLE Presenca ( " +
             "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            "id_aluno INTEGER,"+
             "id_materia INTEGER, " +
-            "data TEXT);"
+            "data TEXT," +
+            "horario TEXT);"
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQLCREATECURSO)
@@ -53,7 +55,7 @@ class AgendaDBHelper(context: Context?) :
 
     companion object {
         private const val DATABASE_NAME = "Faculdade.db"
-        private const val DATABASE_VERSION = 13
+        private const val DATABASE_VERSION = 16
         private const val SQL_DELETE_Aluno = "DROP TABLE IF EXISTS Aluno"
         private const val SQL_DELETE_Curso = "DROP TABLE IF EXISTS Curso"
         private const val SQL_DELETE_Materia = "DROP TABLE IF EXISTS Materia"
