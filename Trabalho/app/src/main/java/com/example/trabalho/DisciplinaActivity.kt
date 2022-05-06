@@ -1,28 +1,33 @@
 package com.example.trabalho
 
-import android.annotation.SuppressLint
+import android.Manifest
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import org.w3c.dom.Text
+import androidx.core.app.ActivityCompat
 import java.util.*
 
 class DisciplinaActivity : AppCompatActivity() {
+
+    var gps: ObtainGPS? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_disciplina)
 
+        getLocalization()
+
         val Disciplina : TextView = findViewById(R.id.discalvo)
         val extras = intent.extras
-        val latitudeunicid  = -23.5362861
-        val longitudeunicid = -46.5603371
-        val latitude : TextView = findViewById(R.id.latitude)
-        val longitude : TextView = findViewById(R.id.longitude)
         val calendar: Calendar = Calendar.getInstance(TimeZone.getTimeZone("Brazil/East"))
         val ano: Int = calendar.get(Calendar.YEAR)
         val mes: Int = calendar.get(Calendar.MONTH)
@@ -114,6 +119,95 @@ class DisciplinaActivity : AppCompatActivity() {
             intent.putExtra("idaluno", extras.getInt("idaluno"));
 
             startActivity(intent)
+        }
+    }
+
+    fun GetLocalization(context: Context?): Boolean {
+        val REQUEST_PERMISSION_LOCALIZATION = 221
+        var res = true
+        if (ActivityCompat.checkSelfPermission(
+                context!!,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            res = false
+            ActivityCompat.requestPermissions(
+                (context as Activity?)!!, arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ),
+                REQUEST_PERMISSION_LOCALIZATION
+            )
+        }
+        if (res == true){
+            gps = ObtainGPS(this)
+            if (gps!!.canGetLocation()){
+                val latitude : TextView = findViewById(R.id.latitude)
+                val longitude : TextView = findViewById(R.id.longitude)
+                val LatitudeAtual = gps!!.getLatitude()
+                val longitudeAtual = gps!!.getLongitude()
+                val latitudeunicid  = -23.5362861
+                val longitudeunicid = -46.5603371
+                latitude.text = (LatitudeAtual).toString()
+                longitude.text = (longitudeAtual).toString()
+
+                val loc1 = Location("")
+                loc1.latitude = latitudeunicid
+                loc1.longitude = longitudeunicid
+
+                val loc2 = Location("")
+                loc2.latitude = LatitudeAtual
+                loc2.longitude = longitudeAtual
+
+                val distanceInMeters = loc1.distanceTo(loc2) / 1000
+                if (distanceInMeters <= 50){
+
+                }
+
+            }
+        }else{
+            getLocalization()
+        }
+        return res
+    }
+
+    fun getLocalization() {
+        if (GetLocalization(this)) {
+            val latitude : TextView = findViewById(R.id.latitude)
+            val longitude : TextView = findViewById(R.id.longitude)
+            val local : TextView = findViewById(R.id.local)
+            val latitudeunicid  = -23.5362861
+            val longitudeunicid = -46.5603371
+            if (gps!!.canGetLocation()) {
+                val LatitudeAtual = gps!!.getLatitude()
+                val longitudeAtual = gps!!.getLongitude()
+                latitude.text = (LatitudeAtual).toString()
+                longitude.text = (longitudeAtual).toString()
+
+                val loc1 = Location("")
+                loc1.latitude = latitudeunicid
+                loc1.longitude = longitudeunicid
+
+                val loc2 = Location("")
+                loc2.latitude = LatitudeAtual
+                loc2.longitude = longitudeAtual
+
+                val distanceInMeters = loc1.distanceTo(loc2) / 1000
+                if (distanceInMeters <= 50) {
+                    local.text = "Você esta proximo a unicid"
+                    local.setTextColor(resources.getColor(R.color.verde))
+                }else{
+                    local.text = "Não está proximo a unicid"
+                    local.setTextColor(resources.getColor(R.color.vermelho))
+                }
+
+                Toast.makeText(this, "$distanceInMeters Metros da unicid", Toast.LENGTH_SHORT).show()
+            } else {
+                latitude.text = "Erro"
+                longitude.text = "Erro"
+                gps!!.showSettingsAlert()
+            }
         }
     }
 
