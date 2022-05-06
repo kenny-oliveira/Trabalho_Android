@@ -1,17 +1,11 @@
 package com.example.trabalho
 
-import android.Manifest
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.util.*
 
@@ -114,7 +108,7 @@ class ListagemActivity : AppCompatActivity() {
         val hora: Int = calendar.get(Calendar.HOUR_OF_DAY)
         val minuto: Int = calendar.get(Calendar.MINUTE)
 
-        val dao = AgendaDAO(baseContext)
+        val dao = DAO(baseContext)
         val MateriaLista = dao.retornarTodosMateria()
         val CursoLista = dao.retornarTodosCurso()
 
@@ -134,8 +128,6 @@ class ListagemActivity : AppCompatActivity() {
 
             for (curso in CursoLista!!) {
                 if (curso!!.id.toString() == idcursoaluno.toString()) {
-                    Log.i("Curso: ", curso!!.nome)
-                    Log.i("Dia Atual: ", (RetornarDia(dia)))
                     for (mater in MateriaLista!!) {
                         if (mater!!.idcurso == curso!!.id) {
                             DiaSList.add(mater!!.dia)

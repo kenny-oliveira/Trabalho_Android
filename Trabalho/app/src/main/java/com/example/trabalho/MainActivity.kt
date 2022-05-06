@@ -2,7 +2,6 @@ package com.example.trabalho
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val dao = AgendaDAO(baseContext)
+        val dao = DAO(baseContext)
         dao.InserirDados()
 
         val AlunosLista = dao.retornarTodosAluno()
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         var sucesso = 0
         btnentrar.setOnClickListener {
             for (estealuno in AlunosLista!!) {
-                Log.i("Aluno: ",estealuno!!.nome)
               if (rgm_entrada.text.toString() == estealuno.rgm.toString()){
                   if (senha_entrada.text.toString() == estealuno.senha){
                       sucesso = 1

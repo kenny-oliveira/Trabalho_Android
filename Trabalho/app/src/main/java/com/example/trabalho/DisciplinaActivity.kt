@@ -7,10 +7,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import java.util.*
@@ -18,6 +16,7 @@ import java.util.*
 class DisciplinaActivity : AppCompatActivity() {
 
     var gps: ObtainGPS? = null
+    var gpsunicid = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +26,7 @@ class DisciplinaActivity : AppCompatActivity() {
         getLocalization()
 
         val Disciplina : TextView = findViewById(R.id.discalvo)
+        val btn_presenca : Button = findViewById(R.id.mpresenca)
         val extras = intent.extras
         val calendar: Calendar = Calendar.getInstance(TimeZone.getTimeZone("Brazil/East"))
         val ano: Int = calendar.get(Calendar.YEAR)
@@ -36,19 +36,21 @@ class DisciplinaActivity : AppCompatActivity() {
         val minuto: Int = calendar.get(Calendar.MINUTE)
 
 
+        if (!gpsunicid){
+            btn_presenca.isEnabled = false
+        }
+
         if (extras != null) {
             val Diadadisc = extras.getString("dia_semana_disc")
             val Disc_do_dia = extras.getString("disciplina_do_dia")
             val DiscliplinAlvo = extras.getString("disciplinaalvo")
-            val mpresenca : Button = findViewById(R.id.mpresenca)
             Disciplina.text = DiscliplinAlvo
 
-            val dao = AgendaDAO(baseContext)
+            val dao = DAO(baseContext)
             val MateriaLista = dao.retornarTodosMateria()
             val PresencaLista = dao.retornarTodosPresenca()
             val AlunoLista = dao.retornarTodosAluno()
             val idaluno = extras.getInt("idaluno")
-            val btn_presenca : Button = findViewById(R.id.mpresenca)
             val txt_horariopre : TextView = findViewById(R.id.horariopresenca)
 
             for (presenca in PresencaLista!!){
@@ -76,17 +78,11 @@ class DisciplinaActivity : AppCompatActivity() {
                 val minutosaulainicio = Lista[1].toInt()+(Lista[0].toInt()*60)
                 val minutosaulafinal = Lista2[1].toInt()+(Lista2[0].toInt()*60)
 
-
                 if (materia!!.nome == DiscliplinAlvo){
                     val horarioaula : TextView = findViewById(R.id.horarioaula)
                     horarioaula.text = materia!!.horarioinicio.toString() + " a "+materia!!.horariofinal.toString()
                     var dataatual = (dia).toString().padStart(2, '0')+"/"+(mes).toString().padStart(2, '0')+"/"+(ano).toString()
                     val minpad = minuto.toString().padStart(2, '0')
-                    Log.i("Atual Minutos: ",atualminutos.toString())
-                    Log.i("Horario Inicio Minutos: ",minutosaulainicio.toString())
-                    Log.i("Horario Final Minutos: ",minutosaulafinal.toString())
-                    Log.i("Horario Test Minutos: ",minutosaulafinal.toString())
-                    /**flag do gps**/
                     if (atualminutos >= minutosaulainicio && atualminutos <= minutosaulafinal){
                     btn_presenca.setOnClickListener {
                         if (dao.salvarPresenca(materia!!.id, idaluno!!, dataatual!!, ("$hora:" + minpad)!!)) {
@@ -104,14 +100,13 @@ class DisciplinaActivity : AppCompatActivity() {
 
 
             if (Disc_do_dia != DiscliplinAlvo) {
-                mpresenca.isEnabled = false;
+                btn_presenca.isEnabled = false;
             }
 
         }
 
         val btn_voltar : Button = findViewById(R.id.btn_voltar)
         btn_voltar.setOnClickListener {
-            /**voltar para os dias da semana**/
             val intent = Intent(this, ListagemActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.putExtra("idcursoaluno", extras!!.getInt("idcursoaluno"));
@@ -145,6 +140,7 @@ class DisciplinaActivity : AppCompatActivity() {
             if (gps!!.canGetLocation()){
                 val latitude : TextView = findViewById(R.id.latitude)
                 val longitude : TextView = findViewById(R.id.longitude)
+                val local : TextView = findViewById(R.id.local)
                 val LatitudeAtual = gps!!.getLatitude()
                 val longitudeAtual = gps!!.getLongitude()
                 val latitudeunicid  = -23.5362861
@@ -161,10 +157,15 @@ class DisciplinaActivity : AppCompatActivity() {
                 loc2.longitude = longitudeAtual
 
                 val distanceInMeters = loc1.distanceTo(loc2) / 1000
-                if (distanceInMeters <= 50){
-
+                if (distanceInMeters <= 50) {
+                    gpsunicid = true
+                    local.text = "Você esta proximo a unicid"
+                    local.setTextColor(resources.getColor(R.color.verde))
+                }else{
+                    gpsunicid = false
+                    local.text = "Não está proximo a unicid"
+                    local.setTextColor(resources.getColor(R.color.vermelho))
                 }
-
             }
         }else{
             getLocalization()
@@ -195,14 +196,15 @@ class DisciplinaActivity : AppCompatActivity() {
 
                 val distanceInMeters = loc1.distanceTo(loc2) / 1000
                 if (distanceInMeters <= 50) {
+                    gpsunicid = true
                     local.text = "Você esta proximo a unicid"
                     local.setTextColor(resources.getColor(R.color.verde))
                 }else{
+                    gpsunicid = false
                     local.text = "Não está proximo a unicid"
                     local.setTextColor(resources.getColor(R.color.vermelho))
                 }
 
-                Toast.makeText(this, "$distanceInMeters Metros da unicid", Toast.LENGTH_SHORT).show()
             } else {
                 latitude.text = "Erro"
                 longitude.text = "Erro"

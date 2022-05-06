@@ -1,6 +1,6 @@
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.example.trabalho.AgendaDBHelper
+import com.example.trabalho.DBHelper
 
 class DBGateway private constructor(ctx: Context) {
     val database: SQLiteDatabase
@@ -15,7 +15,7 @@ class DBGateway private constructor(ctx: Context) {
         }
     }
     init {
-        val helper = AgendaDBHelper(ctx)
+        val helper = DBHelper(ctx)
         database = helper.writableDatabase
         database2 = helper.readableDatabase
     }

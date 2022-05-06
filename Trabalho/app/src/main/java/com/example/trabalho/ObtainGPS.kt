@@ -50,7 +50,6 @@ class ObtainGPS(context: Context) : Service(), LocationListener {
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled
                 getLocation()
-                Log.i("Pegando","TEST123")
             } else {
                 canGetLocation = true
                 // First get location from Network Provider
@@ -70,7 +69,6 @@ class ObtainGPS(context: Context) : Service(), LocationListener {
                         MIN_TIME_BW_UPDATES,
                         MIN_DISTANCE_CHANGE_FOR_UPDATES.toFloat(), this
                     )
-                    Log.d("Network", "Network")
                     if (locationManager != null) {
                         location = locationManager!!
                             .getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
@@ -80,7 +78,6 @@ class ObtainGPS(context: Context) : Service(), LocationListener {
                         }
                     }
                 }
-                // if GPS Enabled get lat/long using GPS Services
                 if (isGPSEnabled) {
                     if (location == null) {
                         locationManager!!.requestLocationUpdates(
@@ -88,13 +85,10 @@ class ObtainGPS(context: Context) : Service(), LocationListener {
                             MIN_TIME_BW_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES.toFloat(), this
                         )
-                        Log.d("GPS Enabled", "GPS Enabled")
                         if (locationManager != null) {
-                            Log.d("LocationMAnager", "LocationMAnager")
                             location = locationManager!!
                                 .getLastKnownLocation(LocationManager.GPS_PROVIDER)
                             if (location != null) {
-                                Log.d("Pegando latitude e", "Pegando latitude e")
                                 latitude = location!!.getLatitude()
                                 longitude = location!!.getLongitude()
                             }

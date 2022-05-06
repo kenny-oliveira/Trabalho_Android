@@ -7,7 +7,7 @@ import android.database.Cursor
 import android.util.Log
 
 
-class AgendaDAO(ctx: Context?) {
+class DAO(ctx: Context?) {
     private val TABLE_Curso = "Curso"
     private val TABLE_Materia = "Materia"
     private val TABLE_Aluno = "Aluno"
@@ -87,8 +87,6 @@ class AgendaDAO(ctx: Context?) {
             salvarAluno(20558619, "Gustavo Henrique de Carvalho", "02072001", 1)
             salvarAluno(20558619, "Everton Tunis Monteiro", "12344321", 1)
             salvarAluno(21571112, "Nicolas Matheus Rodrigues Viana", "343434", 1)
-            salvarAluno(123, "Naruto", "123", 1)
-            salvarAluno(1, "Sasuke", "1", 1)
             salvarMateria("TRABALHO DE GRADUAÇÃO INTERDISCIPLINAR I","Segunda-Feira","19.10","20.25",1)
             salvarMateria("PROGRAMAÇÃO PARA DISPOSITIVOS MÓVEIS","Quarta-Feira","19.10","21.50",1)
             salvarMateria("FUNDAMENTOS DE INTELIGÊNCIA ARTIFICIAL","Quinta-Feira","19.10","21.50",1)

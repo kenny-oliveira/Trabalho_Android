@@ -6,7 +6,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class AgendaDBHelper(context: Context?) :
+class DBHelper(context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     private val SQLCREATECURSO = "CREATE TABLE Curso ( " +
             "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
